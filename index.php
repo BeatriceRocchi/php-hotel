@@ -59,16 +59,20 @@ $hotels = [
 </head>
 
 <body>
-  <h1 class="text-center">PHP Hotel</h1>
+  <h1 class="text-center my-5">PHP Hotel</h1>
   <div class="container">
     <div class="row row-cols-5">
       <?php foreach ($hotels as $hotel) : ?>
-        <div class="col">
-          <div><?php echo $hotel['name'] ?></div>
-          <div><?php echo $hotel['description'] ?></div>
-          <div>Parcheggio: <?php echo $hotel['parking'] ? 'Sì' : 'No' ?></div>
-          <div>Voto: <?php echo $hotel['vote'] ?></div>
-          <div>Distanza dal centro: <?php echo $hotel['distance_to_center'] ?> km</div>
+        <div class="col ">
+          <div class="card h-100 text-bg-info">
+            <div class="card-body">
+              <h5 class="card-title text-center mb-3"><?php echo $hotel['name'] ?></h5>
+              <h6 class="card-subtitle mb-3 text-body-secondary text-center"><?php echo $hotel['description'] ?></h6>
+              <p class="card-text">Parcheggio: <?php echo $hotel['parking'] ? 'Sì' : 'No' ?></p>
+              <p class="card-text">Distanza dal centro: <?php echo $hotel['distance_to_center'] ?> km</p>
+              <p class="card-text">Voto: <?php echo $hotel['vote'] ?></p>
+            </div>
+          </div>
         </div>
       <?php endforeach ?>
     </div>
