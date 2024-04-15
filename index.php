@@ -41,6 +41,7 @@ $hotels = [
 
 ];
 
+$option_parking = $_GET['optionParking'];
 ?>
 <!-- /PHP -->
 
@@ -61,19 +62,35 @@ $hotels = [
 <body>
   <h1 class="text-center my-5">PHP Hotel</h1>
   <div class="container">
+
+    <!-- Form per filtrare hotel da mostrare -->
+    <form action="index.php" method="GET">
+      <label class="form-label" for="optionParking">Filtra per disponibilità parcheggio:</label>
+      <select class="form-select mb-4" name="optionParking" id="optionParking">
+        <option value="all">Tutti</option>
+        <option value="true">Con parcheggio</option>
+        <option value="false">Senza parcheggio</option>
+      </select>
+      <button type="submit" class="btn btn-primary mb-4">Ricerca</button>
+    </form>
+    <!-- /Form -->
+
     <div class="row row-cols-5">
       <?php foreach ($hotels as $hotel) : ?>
-        <div class="col ">
-          <div class="card h-100 text-bg-info">
-            <div class="card-body">
-              <h5 class="card-title text-center mb-3"><?php echo $hotel['name'] ?></h5>
-              <h6 class="card-subtitle mb-3 text-body-secondary text-center"><?php echo $hotel['description'] ?></h6>
-              <p class="card-text">Parcheggio: <?php echo $hotel['parking'] ? 'Sì' : 'No' ?></p>
-              <p class="card-text">Distanza dal centro: <?php echo $hotel['distance_to_center'] ?> km</p>
-              <p class="card-text">Voto: <?php echo $hotel['vote'] ?></p>
+        <!-- Condizione sulla card: a) mostrare se il filtro del parcheggio non è stato impostato, b) se è stato impostato ed è pari ad 'all', oppure c) se è stato impostato ed il valore è uguale a quello nella card specifica -->
+        <?php if (!isset($option_parking) || $option_parking === 'all' || (var_export($hotel['parking'], true) == $option_parking)) : ?>
+          <div class="col">
+            <div class="card h-100 text-bg-info">
+              <div class="card-body">
+                <h5 class="card-title text-center mb-3"><?php echo $hotel['name'] ?></h5>
+                <h6 class="card-subtitle mb-3 text-body-secondary text-center"><?php echo $hotel['description'] ?></h6>
+                <p class="card-text">Parcheggio: <?php echo $hotel['parking'] ? 'Sì' : 'No' ?></p>
+                <p class="card-text">Distanza dal centro: <?php echo $hotel['distance_to_center'] ?> km</p>
+                <p class="card-text">Voto: <?php echo $hotel['vote'] ?></p>
+              </div>
             </div>
           </div>
-        </div>
+        <?php endif ?>
       <?php endforeach ?>
     </div>
   </div>
