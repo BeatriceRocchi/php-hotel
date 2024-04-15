@@ -42,9 +42,7 @@ $hotels = [
 ];
 
 $option_parking = $_GET['optionParking'];
-$input_vote = $_GET['inputVote'];
-var_dump($input_vote);
-var_dump($option_parking);
+$option_vote = $_GET['optionVote'];
 ?>
 <!-- /PHP -->
 
@@ -58,6 +56,9 @@ var_dump($option_parking);
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Fontawesome -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css' integrity='sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==' crossorigin='anonymous' />
 
   <title>PHP Hotel</title>
 </head>
@@ -75,8 +76,8 @@ var_dump($option_parking);
         <option value="false">Senza parcheggio</option>
       </select>
 
-      <label class="form-label" for="inputVote">Filtra per voto da:</label>
-      <select class="form-select mb-4" name="inputVote" id="inputVote">
+      <label class="form-label" for="optionVote">Filtra per voto da:</label>
+      <select class="form-select mb-4" name="optionVote" id="optionVote">
         <option value=""></option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -91,13 +92,13 @@ var_dump($option_parking);
     <div class="row row-cols-5">
       <?php foreach ($hotels as $hotel) : ?>
         <!-- Condizione sulla card: a) mostrare la card se non è stato impostato nessun filtro (cioè se le variabili $option_parking e $input_vote non sono state settate), b) se sono stati impostati i filtri su parcheggio e voto, mostrare la card se la variabile $option_parking è uguale al valore associato alla chiave 'parking' nella card specifica e se la variabile $input_vote è minore o uguale al valore associato alla chiave 'vote' nella card specifica, c) se le variabili sono vuote, mostrare la card -->
-        <?php if ((!isset($option_parking) && !isset($input_vote)) || (empty($option_parking) && empty($input_vote)) || (isset($option_parking) && isset($input_vote) && (var_export($hotel['parking'], true) === $option_parking || empty($option_parking)) && (var_export($hotel['vote'], true) >= $input_vote || empty($input_vote)))) : ?>
+        <?php if ((!isset($option_parking) && !isset($option_vote)) || (empty($option_parking) && empty($option_vote)) || (isset($option_parking) && isset($option_vote) && (var_export($hotel['parking'], true) === $option_parking || empty($option_parking)) && (var_export($hotel['vote'], true) >= $option_vote || empty($option_vote)))) : ?>
           <div class="col">
             <div class="card h-100 text-bg-info">
               <div class="card-body">
                 <h5 class="card-title text-center mb-3"><?php echo $hotel['name'] ?></h5>
                 <h6 class="card-subtitle mb-3 text-body-secondary text-center"><?php echo $hotel['description'] ?></h6>
-                <p class="card-text">Parcheggio: <?php echo $hotel['parking'] ? 'Sì' : 'No' ?></p>
+                <p class="card-text">Parcheggio: <?php echo $hotel['parking'] ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-solid fa-xmark"></i>' ?></p>
                 <p class="card-text">Distanza dal centro: <?php echo $hotel['distance_to_center'] ?> km</p>
                 <p class="card-text">Voto: <?php echo $hotel['vote'] ?></p>
               </div>
