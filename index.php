@@ -42,6 +42,9 @@ $hotels = [
 ];
 
 $option_parking = $_GET['optionParking'];
+$input_vote = $_GET['inputVote'];
+var_dump($input_vote);
+var_dump($option_parking);
 ?>
 <!-- /PHP -->
 
@@ -67,9 +70,19 @@ $option_parking = $_GET['optionParking'];
     <form action="index.php" method="GET">
       <label class="form-label" for="optionParking">Filtra per disponibilità parcheggio:</label>
       <select class="form-select mb-4" name="optionParking" id="optionParking">
-        <option value="all">Tutti</option>
+        <option value=""></option>
         <option value="true">Con parcheggio</option>
         <option value="false">Senza parcheggio</option>
+      </select>
+
+      <label class="form-label" for="inputVote">Filtra per voto da:</label>
+      <select class="form-select mb-4" name="inputVote" id="inputVote">
+        <option value=""></option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
       </select>
       <button type="submit" class="btn btn-primary mb-4">Ricerca</button>
     </form>
@@ -77,8 +90,8 @@ $option_parking = $_GET['optionParking'];
 
     <div class="row row-cols-5">
       <?php foreach ($hotels as $hotel) : ?>
-        <!-- Condizione sulla card: a) mostrare se il filtro del parcheggio non è stato impostato, b) se è stato impostato ed è pari ad 'all', oppure c) se è stato impostato ed il valore è uguale a quello nella card specifica -->
-        <?php if (!isset($option_parking) || $option_parking === 'all' || (var_export($hotel['parking'], true) == $option_parking)) : ?>
+        <!-- Condizione sulla card: a) mostrare la card se non è stato impostato nessun filtro (cioè se le variabili $option_parking e $input_vote non sono state settate), b) se sono stati impostati i filtri su parcheggio e voto, mostrare la card se la variabile $option_parking è uguale al valore associato alla chiave 'parking' nella card specifica e se la variabile $input_vote è minore o uguale al valore associato alla chiave 'vote' nella card specifica, c) se le variabili sono vuote, mostrare la card -->
+        <?php if ((!isset($option_parking) && !isset($input_vote)) || (empty($option_parking) && empty($input_vote)) || (isset($option_parking) && isset($input_vote) && (var_export($hotel['parking'], true) === $option_parking || empty($option_parking)) && (var_export($hotel['vote'], true) >= $input_vote || empty($input_vote)))) : ?>
           <div class="col">
             <div class="card h-100 text-bg-info">
               <div class="card-body">

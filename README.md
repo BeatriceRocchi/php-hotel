@@ -14,5 +14,7 @@ NOTA: deve essere possibile utilizzare entrambi i filtri contemporaneamente (es.
 1. Importare l'array di hotel in index.php
 2. Tramite un foreach sull'array di hotel, stampare per ogni singolo hotel tutti i dati
 3. Stampare i dati in una card di Bootstrap
-4. Inserire un form con una select per filtrare gli hotel con il parcheggio
+4. Inserire un form con una select per filtrare gli hotel in base alla presenza o meno del parcheggio
 5. Inserire una condizione if per mostrare la singola card se: a) non è fleggata nessuna opzione b) è fleggata l'opzione "Tutti" c) è fleggata l'opzione che ha lo stesso valore del booleano assegnato alla chiave 'parking'
+6. Inserire nel form una seconda select per filtrare gli hotel in base al voto
+7. Aggiungere alla condizione if già esistente sulla card, anche la condizione in base alla select del voto
