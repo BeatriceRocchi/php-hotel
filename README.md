@@ -10,3 +10,6 @@ Partendo da questo array di hotel (https://www.codepile.net/pile/OEWY7Q1G), stam
 NOTA: deve essere possibile utilizzare entrambi i filtri contemporaneamente (es. ottenere una lista con hotel che dispongono di parcheggio e che hanno un voto di tre stelle o superiore). Se non viene specificato nessun filtro, visualizzare come in precedenza tutti gli hotel.
 
 ## Svolgimento
+
+1. Importare l'array di hotel in index.php
+2. Tramite un foreach sull'array di hotel, stampare per ogni singolo hotel tutti i dati
